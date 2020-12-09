@@ -21,13 +21,27 @@ class User(UserMixin, Model):
     class Meta:
         database = DATABASE
 
+#or DecimalField() FloatField() DoubleField()
 class Trip(Model):
-    orig_station = CharField()
-    dest_station = CharField()
+    name = CharField()
+    center_lat = CharField()
+    center_long = CharField()
+    pin1_title = CharField()
+    pin1_subtitle = CharField()
+    pin1_text = CharField()
+    pin1_color = CharField()
+    pin1_lat = CharField()
+    pin1_long = CharField()
+    pin2_title = CharField()
+    pin2_subtitle = CharField()
+    pin2_text = CharField()
+    pin2_color = CharField()
+    pin2_lat = CharField()
+    pin2_long = CharField()
     #create a relationship between an trip and a user:
     uploader = ForeignKeyField(User, backref='trips')
-    date = DateTimeField()
-    time = DateTimeField()
+    date = DateField()
+    time = TimeField()
     created_at = DateTimeField(default=datetime.datetime.now)
 
     class Meta:

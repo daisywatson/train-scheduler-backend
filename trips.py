@@ -35,8 +35,14 @@ def create_trips():
 
     print(type(payload), 'payload')
 
-    new_trip= models.Trip.create(orig_station=payload['orig_station'],
-    uploader=current_user.id, dest_station=payload['dest_station'],
+    new_trip= models.Trip.create(name=payload['name'],
+    uploader=current_user.id, center_lat=payload['center_lat'],
+    center_long=payload['center_long'], pin1_title=payload['pin1_title'],
+    pin1_subtitle=payload['pin1_subtitle'], pin1_text=payload['pin1_text'],
+    pin1_color=payload['pin1_color'], pin1_lat=payload['pin1_lat'],
+    pin1_long=payload['pin1_long'], pin2_title=payload['pin2_title'],
+    pin2_subtitle=payload['pin2_subtitle'], pin2_text=payload['pin2_text'],
+    pin2_color=payload['pin2_color'], pin2_lat=payload['pin2_lat'],
     date=payload['date'], time=payload['time'])
     ## see the object
     print(trip.__dict__)
