@@ -23,6 +23,8 @@ trip = Blueprint('trips', 'trip')
 def get_my_trips():
     try:
         trips = [model_to_dict(trip) for trip in current_user.trips]
+        for trip in trips:
+            trip['time']=trip['time'].__str__()
         print(trips)
         return jsonify(data=trips, status={"code": 201, "message": "Success"})
     except models.DoesNotExist:
@@ -43,7 +45,7 @@ def create_trips():
     pin1_long=payload['pin1_long'], pin2_title=payload['pin2_title'],
     pin2_subtitle=payload['pin2_subtitle'], pin2_text=payload['pin2_text'],
     pin2_color=payload['pin2_color'], pin2_lat=payload['pin2_lat'],
-    date=payload['date'], time=payload['time'])
+    pin2_long=payload['pin1_long'], date=payload['date'], time=payload['time'])
     ## see the object
     print(trip.__dict__)
     ## Look at all the methods
@@ -56,9 +58,10 @@ def create_trips():
 # Show route
 @trip.route('/mypage/<id>', methods=['GET'])
 def get_one_trip(id):
-    trip = models.Trip.get_by_id(id)
-    print(trip.__dict__)
-    return jsonify(data=model_to_dict(trip), status={"code": 200, "message": "Success"})
+    trip = model_to_dict(models.Trip.get_by_id(id))
+    trip['time']=trip['time'].__str__()
+
+    return jsonify(data=trip, status={"code": 200, "message": "Success"})
 
 # Update route
 @trip.route('/mypage/<id>', methods=["PUT"])
@@ -69,6 +72,7 @@ def update_trip(id):
     query = models.Trip.update(**payload).where(models.Trip.id==id)
     query.execute()
     trip = model_to_dict(models.Trip.get_by_id(id))
+    trip['time']=trip['time'].__str__()
     return jsonify(data=trip, status={"code": 200, "message": "Success"})
 
 # Delete route
