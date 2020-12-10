@@ -27,8 +27,8 @@ login_manager.init_app(app)
 
 
 # CORS(app, supports_credentials = True)
-CORS(trip, origins=['http://localhost:3000', 'https://www.bing.com'], supports_credentials=True)
-CORS(users, origins=['http://localhost:3000', 'https://www.bing.com'], supports_credentials=True)
+CORS(trip, origins=['http://localhost:3000', 'https://www.bing.com', 'https://trip-planner-map-be.herokuapp.com/'], supports_credentials=True)
+CORS(users, origins=['http://localhost:3000', 'https://www.bing.com', 'https://trip-planner-map-be.herokuapp.com/'], supports_credentials=True)
 
 
 
